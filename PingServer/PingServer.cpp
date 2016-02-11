@@ -4,6 +4,22 @@
 #include "stdafx.h"
 #include "PingServer.h"
 
+STDAPI DllCanUnloadNow(void) {
+
+}
+
+STDAPI DllGetClassObject(REFCLSID rclsid, REFIID riid, LPVOID* ppv) {
+
+}
+
+STDAPI DllRegisterServer(void) {
+
+}
+
+STDAPI DllUnregisterServer(void) {
+
+}
+
 int main() {
 	return 0;
 }
