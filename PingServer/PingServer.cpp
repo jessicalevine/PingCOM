@@ -20,6 +20,6 @@ STDAPI DllUnregisterServer(void) {
 
 }
 
-int main() {
-	return 0;
+extern "C" BOOL WINAPI DllMain(HINSTANCE hInstance, DWORD dwReason, LPVOID lpReserved) {
+
 }
