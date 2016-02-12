@@ -11,4 +11,5 @@
 #include <tchar.h>
 
 #include <windows.h>
-#include "ping.h"
+#include <initguid.h>
+#include "ping_h.h"
