@@ -27,7 +27,7 @@
     <ClInclude Include="PingServer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ping_h.h">
+    <ClInclude Include="..\PingProxyStubDll\ping_h.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -41,22 +41,11 @@
     <ClCompile Include="dllmain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ping_i.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ping_p.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="CoPingEngine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CoPingEngineFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Midl Include="ping.idl">
-      <Filter>Source Files</Filter>
-    </Midl>
   </ItemGroup>
 </Project>

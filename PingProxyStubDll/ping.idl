@@ -1,16 +1,16 @@
 import "oaidl.idl";
 import "unknwn.idl";
 
-[ object, uuid(C3C38ECD-6377-4560-9D48-D9E493728F77) ]
+[object, uuid(C3C38ECD-6377-4560-9D48-D9E493728F77)]
 interface IPingable : IUnknown {
 	HRESULT Initialize();
 	HRESULT Ping([in] int pingCode, [out] int * statusCode);
 }
 
-[ uuid(6D2530EA-D5D8-46EC-A994-3AD1036BDC9B), version(1.0) ]
+[uuid(6D2530EA-D5D8-46EC-A994-3AD1036BDC9B), version(1.0)]
 library PingLib {
 
-	[ uuid(5819432D-806B-42C1-97DE-DE5A015A8497) ]
+	[uuid(5819432D-806B-42C1-97DE-DE5A015A8497)]
 	coclass CoPingEngine {
 		[default] interface IPingable;
 	};

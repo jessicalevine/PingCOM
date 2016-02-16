@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 8.00.0603 */
-/* at Fri Feb 12 21:51:50 2016
+/* at Tue Feb 16 19:41:08 2016
  */
 /* Compiler settings for ping.idl:
     Oicf, W1, Zp8, env=Win32 (32b run), target_arch=X86 8.00.0603 

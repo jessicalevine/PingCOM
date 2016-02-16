@@ -1,0 +1,7 @@
+; pingdef.def
+LIBRARY             PingProxyStubDll.dll
+EXPORTS
+            DllGetClassObject  PRIVATE  
+            DllCanUnloadNow   PRIVATE
+            DllRegisterServer    PRIVATE
+            DllUnregisterServer PRIVATE
