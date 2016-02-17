@@ -1,6 +1,6 @@
 #include "stdafx.h"
 
-class CoPingEngine : IClassFactory {
+class CoPingEngineFactory : IClassFactory {
 	STDMETHODIMP QueryInterface(REFIID riid, void **ppv) {}
 	STDMETHODIMP_(ULONG) AddRef(void) {}
 	STDMETHODIMP_(ULONG) Release(void) {}
