@@ -1,8 +1,9 @@
 #include "stdafx.h"
 #include "CoPingEngineFactory.h"
+#include "PingServer.h"
 
-CoPingEngineFactory::CoPingEngineFactory() { }
-CoPingEngineFactory::~CoPingEngineFactory() {  }
+CoPingEngineFactory::CoPingEngineFactory() { ComponentAddRef(); }
+CoPingEngineFactory::~CoPingEngineFactory() { ComponentRelease(); }
 
 STDMETHODIMP CoPingEngineFactory::QueryInterface(REFIID riid, void **ppv) { return E_NOTIMPL;  }
 

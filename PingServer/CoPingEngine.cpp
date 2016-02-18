@@ -1,8 +1,9 @@
 #include "stdafx.h"
 #include "CoPingEngine.h"
+#include "PingServer.h"
 
-CoPingEngine::CoPingEngine() { }
-CoPingEngine::~CoPingEngine() { }
+CoPingEngine::CoPingEngine() { ComponentAddRef(); }
+CoPingEngine::~CoPingEngine() { ComponentRelease(); }
 
 HRESULT CoPingEngine::CreateObject(LPUNKNOWN pUnkOuter, REFIID riid, void** ppv) { return E_NOTIMPL; }
 
