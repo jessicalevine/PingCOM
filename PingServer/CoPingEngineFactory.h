@@ -1,7 +1,8 @@
 #pragma once
 #include "stdafx.h"
 
-class CoPingEngineFactory : IClassFactory {
+class CoPingEngineFactory : public IClassFactory {
+public:
 	STDMETHODIMP QueryInterface(REFIID riid, void **ppv);
 	STDMETHODIMP_(ULONG) AddRef(void);
 	STDMETHODIMP_(ULONG) Release(void);
