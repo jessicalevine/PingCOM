@@ -14,4 +14,5 @@
 
 
 // TODO: reference additional headers your program requires here
+#include <initguid.h>
 #include "ping_h.h"
