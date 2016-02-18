@@ -13,4 +13,6 @@ public:
 
 	STDMETHODIMP Initialize();
 	STDMETHODIMP Ping(int pingCode, int * statusCode);
+private:
+	LONG m_lRefCount;
 };
