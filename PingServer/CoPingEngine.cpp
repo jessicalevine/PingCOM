@@ -1,14 +1,12 @@
 #include "stdafx.h"
+#include "CoPingEngine.h"
 
-class CoPingEngine : IPingable {
-public:
-	static HRESULT CreateObject(LPUNKNOWN pUnkOuter, REFIID riid, void** ppv) { }
+HRESULT CoPingEngine::CreateObject(LPUNKNOWN pUnkOuter, REFIID riid, void** ppv) { return E_NOTIMPL; }
 
-	STDMETHODIMP QueryInterface(REFIID riid, void **ppv) {}
-	STDMETHODIMP_(ULONG) AddRef(void) {}
-	STDMETHODIMP_(ULONG) Release(void) {}
+STDMETHODIMP CoPingEngine::QueryInterface(REFIID riid, void **ppv) { return E_NOTIMPL; }
+STDMETHODIMP_(ULONG) CoPingEngine::AddRef(void) { return 0; }
+STDMETHODIMP_(ULONG) CoPingEngine::Release(void) { return 0;  }
 
 
-	STDMETHODIMP Initialize() { }
-	STDMETHODIMP Ping(int pingCode, int * statusCode) { }
-};
+STDMETHODIMP CoPingEngine::Initialize() { return E_NOTIMPL; }
+STDMETHODIMP CoPingEngine::Ping(int pingCode, int * statusCode) { return E_NOTIMPL; }
