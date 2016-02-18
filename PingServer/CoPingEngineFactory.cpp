@@ -1,9 +1,10 @@
 #include "stdafx.h"
+#include "CoPingEngineFactory.h"
 
-class CoPingEngineFactory : IClassFactory {
-	STDMETHODIMP QueryInterface(REFIID riid, void **ppv) {}
-	STDMETHODIMP_(ULONG) AddRef(void) {}
-	STDMETHODIMP_(ULONG) Release(void) {}
+STDMETHODIMP CoPingEngineFactory::QueryInterface(REFIID riid, void **ppv) { return E_NOTIMPL;  }
 
-	STDMETHODIMP CreateInstance(LPUNKNOWN pUnkOuter, REFIID riid, void **ppv) {}
-};
+STDMETHODIMP_(ULONG) CoPingEngineFactory::AddRef(void) { return 0; }
+STDMETHODIMP_(ULONG) CoPingEngineFactory::Release(void) { return 0; }
+
+STDMETHODIMP CoPingEngineFactory::CreateInstance(LPUNKNOWN pUnkOuter, REFIID riid, void **ppv) { return E_NOTIMPL; }
+STDMETHODIMP CoPingEngineFactory::LockServer(BOOL fLock) { return E_NOTIMPL;  }
