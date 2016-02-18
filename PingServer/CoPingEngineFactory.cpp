@@ -1,6 +1,9 @@
 #include "stdafx.h"
 #include "CoPingEngineFactory.h"
 
+CoPingEngineFactory::CoPingEngineFactory() { }
+CoPingEngineFactory::~CoPingEngineFactory() {  }
+
 STDMETHODIMP CoPingEngineFactory::QueryInterface(REFIID riid, void **ppv) { return E_NOTIMPL;  }
 
 STDMETHODIMP_(ULONG) CoPingEngineFactory::AddRef(void) { return 0; }

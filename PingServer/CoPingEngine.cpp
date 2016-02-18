@@ -1,6 +1,9 @@
 #include "stdafx.h"
 #include "CoPingEngine.h"
 
+CoPingEngine::CoPingEngine() { }
+CoPingEngine::~CoPingEngine() { }
+
 HRESULT CoPingEngine::CreateObject(LPUNKNOWN pUnkOuter, REFIID riid, void** ppv) { return E_NOTIMPL; }
 
 STDMETHODIMP CoPingEngine::QueryInterface(REFIID riid, void **ppv) { return E_NOTIMPL; }

@@ -3,6 +3,8 @@
 
 class CoPingEngine : public IPingable {
 public:
+	CoPingEngine();
+	~CoPingEngine();
 	static HRESULT CreateObject(LPUNKNOWN pUnkOuter, REFIID riid, void** ppv);
 
 	STDMETHODIMP QueryInterface(REFIID riid, void **ppv);
