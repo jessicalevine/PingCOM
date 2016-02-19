@@ -5,7 +5,25 @@
 CoPingEngine::CoPingEngine() : m_lRefCount(0) { ComponentAddRef(); }
 CoPingEngine::~CoPingEngine() { ComponentRelease(); }
 
-HRESULT CoPingEngine::CreateObject(LPUNKNOWN pUnkOuter, REFIID riid, void** ppv) { return E_NOTIMPL; }
+HRESULT CoPingEngine::CreateObject(LPUNKNOWN pUnkOuter, REFIID riid, void** ppv) {
+	*ppv = NULL;
+
+	if (pUnkOuter != NULL) {
+		return CLASS_E_NOAGGREGATION;
+	}
+
+	CoPingEngine * pPingEngine = new CoPingEngine();
+	if (pPingEngine == NULL) {
+		return E_OUTOFMEMORY;
+	}
+
+	HRESULT hr = pPingEngine->QueryInterface(riid, ppv);
+	if (FAILED(hr)) {
+		delete pPingEngine;
+	}
+
+	return hr;
+}
 
 STDMETHODIMP CoPingEngine::QueryInterface(REFIID riid, void **ppv) {
 	if (ppv == NULL) {
