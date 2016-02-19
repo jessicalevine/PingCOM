@@ -56,5 +56,18 @@ STDMETHODIMP_(ULONG) CoPingEngine::Release(void) {
 }
 
 
-STDMETHODIMP CoPingEngine::Initialize() { return E_NOTIMPL; }
-STDMETHODIMP CoPingEngine::Ping(int pingCode, int * statusCode) { return E_NOTIMPL; }
+STDMETHODIMP CoPingEngine::Initialize() {
+	printf("CoPingEngine initialized");
+	return S_OK;
+}
+
+STDMETHODIMP CoPingEngine::Ping(int pingCode, int * statusCode) {
+	if (pingCode == 12345) {
+		*statusCode = 200;
+	}
+	else {
+		*statusCode = 401;
+	}
+
+	return S_OK;
+}

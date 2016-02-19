@@ -11,8 +11,12 @@ int main() {
 	ptrPingable->Initialize();
 
 	int * statusCode = NULL;
-	ptrPingable->Ping(200, statusCode);
-	std::cout << "Status code: " << *statusCode;
+	ptrPingable->Ping(12345, statusCode);
+	std::cout << "Status code for ping code 12345: " << *statusCode;
+	ptrPingable->Ping(777, statusCode);
+	std::cout << "Status code for ping code 777: " << *statusCode;
+	ptrPingable->Ping(1800, statusCode);
+	std::cout << "Status code for ping code 1800: " << *statusCode;
 
 	ptrPingable->Release();
 	CoUninitialize();
