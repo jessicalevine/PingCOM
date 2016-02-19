@@ -57,7 +57,7 @@ STDMETHODIMP_(ULONG) CoPingEngine::Release(void) {
 
 
 STDMETHODIMP CoPingEngine::Initialize() {
-	printf("CoPingEngine initialized");
+	printf("CoPingEngine initialized\n");
 	return S_OK;
 }
 
