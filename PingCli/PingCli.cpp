@@ -10,13 +10,13 @@ int main() {
 	CoCreateInstance(CLSID_CoPingEngine, NULL, CLSCTX_INPROC, IID_IPingable, reinterpret_cast<void**>(&ptrPingable));
 	ptrPingable->Initialize();
 
-	int * statusCode = NULL;
-	ptrPingable->Ping(12345, statusCode);
-	std::cout << "Status code for ping code 12345: " << *statusCode;
-	ptrPingable->Ping(777, statusCode);
-	std::cout << "Status code for ping code 777: " << *statusCode;
-	ptrPingable->Ping(1800, statusCode);
-	std::cout << "Status code for ping code 1800: " << *statusCode;
+	int statusCode;
+	ptrPingable->Ping(12345, &statusCode);
+	std::cout << "Status code for ping code 12345: " << statusCode;
+	ptrPingable->Ping(777, &statusCode);
+	std::cout << "Status code for ping code 777: " << statusCode;
+	ptrPingable->Ping(1800, &statusCode);
+	std::cout << "Status code for ping code 1800: " << statusCode;
 
 	ptrPingable->Release();
 	CoUninitialize();
