@@ -24,8 +24,9 @@ STDMETHODIMP CoPingEngineFactory::QueryInterface(REFIID riid, void **ppv) {
 	return S_OK;
 }
 
-STDMETHODIMP_(ULONG) CoPingEngineFactory::AddRef(void) { return 0; }
-STDMETHODIMP_(ULONG) CoPingEngineFactory::Release(void) { return 0; }
+// CoPingEngineFactory is a singleton whose lifetime is managed in DllMain
+STDMETHODIMP_(ULONG) CoPingEngineFactory::AddRef(void) { return 1; }
+STDMETHODIMP_(ULONG) CoPingEngineFactory::Release(void) { return 1; }
 
 STDMETHODIMP CoPingEngineFactory::CreateInstance(LPUNKNOWN pUnkOuter, REFIID riid, void **ppv) {
 	return CoPingEngine::CreateObject(pUnkOuter, riid, ppv);

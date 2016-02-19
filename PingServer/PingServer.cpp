@@ -7,6 +7,7 @@
 
 wchar_t g_wszModuleName[MAX_PATH];
 LONG g_lComponentRefCounts = 0;
+CoPingEngineFactory * g_pPingEngineFactory;
 
 ULONG ComponentAddRef() {
 	return (InterlockedIncrement(&g_lComponentRefCounts));
