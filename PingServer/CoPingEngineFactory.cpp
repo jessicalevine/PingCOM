@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "CoPingEngineFactory.h"
 #include "PingServer.h"
+#include "CoPingEngine.h"
 
 CoPingEngineFactory::CoPingEngineFactory() { ComponentAddRef(); }
 CoPingEngineFactory::~CoPingEngineFactory() { ComponentRelease(); }
@@ -26,5 +27,17 @@ STDMETHODIMP CoPingEngineFactory::QueryInterface(REFIID riid, void **ppv) {
 STDMETHODIMP_(ULONG) CoPingEngineFactory::AddRef(void) { return 0; }
 STDMETHODIMP_(ULONG) CoPingEngineFactory::Release(void) { return 0; }
 
-STDMETHODIMP CoPingEngineFactory::CreateInstance(LPUNKNOWN pUnkOuter, REFIID riid, void **ppv) { return E_NOTIMPL; }
-STDMETHODIMP CoPingEngineFactory::LockServer(BOOL fLock) { return E_NOTIMPL;  }
+STDMETHODIMP CoPingEngineFactory::CreateInstance(LPUNKNOWN pUnkOuter, REFIID riid, void **ppv) {
+	return CoPingEngine::CreateObject(pUnkOuter, riid, ppv);
+}
+
+STDMETHODIMP CoPingEngineFactory::LockServer(BOOL fLock) {
+	if (fLock) {
+		ComponentAddRef();
+	}
+	else {
+		ComponentRelease();
+	}
+
+	return S_OK;
+}
