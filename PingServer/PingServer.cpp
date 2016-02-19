@@ -37,18 +37,7 @@ STDAPI DllGetClassObject(REFCLSID rclsid, REFIID riid, LPVOID* ppv) {
 		return CLASS_E_CLASSNOTAVAILABLE; // We only support CoPingEngine
 	}
 
-	CoPingEngineFactory * pPingEngineFactory = new CoPingEngineFactory();
-	if (pPingEngineFactory == NULL) {
-		return E_OUTOFMEMORY;
-	}
-
-
-	HRESULT hr = pPingEngineFactory->QueryInterface(riid, ppv);
-	if (FAILED(hr)) {
-		delete pPingEngineFactory;
-	}
-		
-	return hr;
+	return g_pPingEngineFactory->QueryInterface(riid, ppv);
 }
 
 STDAPI DllRegisterServer(void) {
