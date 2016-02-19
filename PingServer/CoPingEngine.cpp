@@ -7,7 +7,23 @@ CoPingEngine::~CoPingEngine() { ComponentRelease(); }
 
 HRESULT CoPingEngine::CreateObject(LPUNKNOWN pUnkOuter, REFIID riid, void** ppv) { return E_NOTIMPL; }
 
-STDMETHODIMP CoPingEngine::QueryInterface(REFIID riid, void **ppv) { return E_NOTIMPL; }
+STDMETHODIMP CoPingEngine::QueryInterface(REFIID riid, void **ppv) {
+	if (ppv == NULL) {
+		return E_INVALIDARG;
+	}
+
+	if (riid == IID_IUnknown || riid == IID_IPingable) {
+		*ppv = static_cast<IPingable *>(this);
+	}
+	else {
+		*ppv = NULL;
+		return E_NOINTERFACE;
+	}
+
+	reinterpret_cast<IUnknown *>(ppv)->AddRef();
+
+	return S_OK;
+}
 
 STDMETHODIMP_(ULONG) CoPingEngine::AddRef(void) { return InterlockedIncrement(&m_lRefCount); }
 
