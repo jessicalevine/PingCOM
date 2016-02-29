@@ -4,7 +4,7 @@ import "unknwn.idl";
 [object, uuid(C3C38ECD-6377-4560-9D48-D9E493728F77)]
 interface IPingable : IUnknown {
 	HRESULT Initialize();
-	HRESULT Ping([in] int pingCode, [out] int * statusCode);
+	HRESULT Ping([in] SHORT pingCode, [out] SHORT * statusCode);
 }
 
 [uuid(6D2530EA-D5D8-46EC-A994-3AD1036BDC9B), version(1.0)]

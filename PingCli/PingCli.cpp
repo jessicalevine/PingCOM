@@ -35,11 +35,11 @@ int main() {
 	HRESULT hr = CoInitializeEx(NULL, COINIT_MULTITHREADED);
 	if (SUCCEEDED(hr)) {
 		IPingable * ptrPingable;
-		HRESULT hr = CoCreateInstance(CLSID_CoPingEngine, NULL, CLSCTX_LOCAL_SERVER, IID_IPingable, reinterpret_cast<void**>(&ptrPingable));
+		HRESULT hr = CoCreateInstance(CLSID_CoPingEngine, NULL, CLSCTX_INPROC_SERVER, IID_IPingable, reinterpret_cast<void**>(&ptrPingable));
 		if (SUCCEEDED(hr)) {
 			ptrPingable->Initialize();
 
-			int statusCode;
+			SHORT statusCode;
 			ptrPingable->Ping(12345, &statusCode);
 			std::cout << "Status code for ping code 12345: " << statusCode << std::endl;
 			ptrPingable->Ping(777, &statusCode);

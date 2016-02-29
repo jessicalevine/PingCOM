@@ -12,7 +12,7 @@ public:
 	STDMETHODIMP_(ULONG) Release(void);
 
 	STDMETHODIMP Initialize();
-	STDMETHODIMP Ping(int pingCode, int * statusCode);
+	STDMETHODIMP Ping(SHORT pingCode, SHORT * statusCode);
 private:
 	LONG m_lRefCount;
 };

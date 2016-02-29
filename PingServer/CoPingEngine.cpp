@@ -61,7 +61,7 @@ STDMETHODIMP CoPingEngine::Initialize() {
 	return S_OK;
 }
 
-STDMETHODIMP CoPingEngine::Ping(int pingCode, int * statusCode) {
+STDMETHODIMP CoPingEngine::Ping(SHORT pingCode, SHORT * statusCode) {
 	if (pingCode == 12345) {
 		*statusCode = 200;
 	}
