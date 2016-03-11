@@ -36,23 +36,43 @@ int main() {
 	HRESULT hr = CoInitializeEx(NULL, COINIT_MULTITHREADED);
 	if (SUCCEEDED(hr)) {
 		IPingable * ptrPingable;
-		HRESULT hr = CoCreateInstance(CLSID_CoPingEngine, NULL, CLSCTX_INPROC_SERVER, IID_IPingable, reinterpret_cast<void**>(&ptrPingable));
+
+		IClassFactory *ptrFactory = NULL;
+		HRESULT hr = CoGetClassObject(
+			CLSID_CoPingEngine,
+			CLSCTX_INPROC_SERVER,
+			NULL, IID_IClassFactory,
+			reinterpret_cast<void**>(&ptrFactory)
+		);
+
 		if (SUCCEEDED(hr)) {
-			ptrPingable->Initialize();
+			hr = ptrFactory->CreateInstance(NULL, IID_IPingable, reinterpret_cast<void**>(&ptrPingable));
+			ptrFactory->Release();
 
-			SHORT statusCode;
-			ptrPingable->Ping(12345, &statusCode);
-			std::cout << "Status code for ping code 12345: " << statusCode << std::endl;
-			ptrPingable->Ping(777, &statusCode);
-			std::cout << "Status code for ping code 777: " << statusCode << std::endl;
-			ptrPingable->Ping(1800, &statusCode);
-			std::cout << "Status code for ping code 1800: " << statusCode << std::endl;
+			if (SUCCEEDED(hr)) {
+				HRESULT hr = ptrPingable->Initialize();
+				if (FAILED(hr)) {
+					DisplayStatus(TEXT("IID_IPingable->Initialize() failed: "), hr);
+				}
 
-			ptrPingable->Release();
+				SHORT statusCode;
+				ptrPingable->Ping(12345, &statusCode);
+				std::cout << "Status code for ping code 12345: " << statusCode << std::endl;
+				ptrPingable->Ping(777, &statusCode);
+				std::cout << "Status code for ping code 777: " << statusCode << std::endl;
+				ptrPingable->Ping(1800, &statusCode);
+				std::cout << "Status code for ping code 1800: " << statusCode << std::endl;
+
+				ptrPingable->Release();
+			}
+			else {
+				DisplayStatus(TEXT("CreateInstance(IID_IPingable) failed: "), hr);
+			}
 		}
 		else {
-			DisplayStatus(TEXT("CoCreateInstance(CoPingEngine) failed: "), hr);
+			DisplayStatus(TEXT("CoGetClassObject(CoPingEngine) failed: "), hr);
 		}
+
 		CoUninitialize();
 	}
 	else {
