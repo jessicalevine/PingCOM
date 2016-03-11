@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 8.00.0603 */
-/* at Mon Feb 29 21:47:10 2016
+/* at Fri Mar 11 23:25:59 2016
  */
 /* Compiler settings for ping.idl:
     Oicf, W1, Zp8, env=Win32 (32b run), target_arch=X86 8.00.0603 
@@ -52,6 +52,13 @@ typedef interface IPingable IPingable;
 #endif 	/* __IPingable_FWD_DEFINED__ */
 
 
+#ifndef __IPingable_FWD_DEFINED__
+#define __IPingable_FWD_DEFINED__
+typedef interface IPingable IPingable;
+
+#endif 	/* __IPingable_FWD_DEFINED__ */
+
+
 #ifndef __CoPingEngine_FWD_DEFINED__
 #define __CoPingEngine_FWD_DEFINED__
 
@@ -76,7 +83,7 @@ extern "C"{
 #define __IPingable_INTERFACE_DEFINED__
 
 /* interface IPingable */
-/* [uuid][object] */ 
+/* [oleautomation][uuid][object] */ 
 
 
 EXTERN_C const IID IID_IPingable;
@@ -170,6 +177,7 @@ EXTERN_C const IID IID_IPingable;
 /* [version][uuid] */ 
 
 
+
 EXTERN_C const IID LIBID_PingLib;
 
 EXTERN_C const CLSID CLSID_CoPingEngine;
@@ -180,13 +188,6 @@ class DECLSPEC_UUID("5819432D-806B-42C1-97DE-DE5A015A8497")
 CoPingEngine;
 #endif
 #endif /* __PingLib_LIBRARY_DEFINED__ */
-
-/* interface __MIDL_itf_ping_0000_0002 */
-/* [local] */ 
-
-
-extern RPC_IF_HANDLE __MIDL_itf_ping_0000_0002_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_ping_0000_0002_v0_0_s_ifspec;
 
 /* Additional Prototypes for ALL interfaces */
 
