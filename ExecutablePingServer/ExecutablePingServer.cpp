@@ -81,6 +81,100 @@ void RegisterComponent()
 	RegSetValueEx(hKey, 0, 0, REG_SZ,
 		(BYTE*)wszValue, ByteLen(wszValue));
 	RegCloseKey(hKey);
+
+	// TypeLib Keys
+
+	// HKEY_CLASSES_ROOT\CLSID\{5819432D-806B-42C1-97DE-DE5A015A8497}\TypeLib
+	//      @="{6D2530EA-D5D8-46EC-A994-3AD1036BDC9B}"
+	wcscpy(wszKey, TEXT("CLSID\\{5819432D-806B-42C1-97DE-DE5A015A8497}\\")
+	TEXT("TypeLib"));
+	RegCreateKey(HKEY_CLASSES_ROOT, wszKey, &hKey);
+	wcscpy(wszValue, TEXT("{6D2530EA-D5D8-46EC-A994-3AD1036BDC9B}"));
+	RegSetValueEx(hKey, TEXT("AppID"), 0, REG_SZ, (BYTE*)wszValue, ByteLen(wszValue));
+	RegCloseKey(hKey);
+
+	// HKEY_CLASSES_ROOT\TypeLib\{6D2530EA-D5D8-46EC-A994-3AD1036BDC9B}
+	wcscpy(wszKey, TEXT("TypeLib\\{6D2530EA-D5D8-46EC-A994-3AD1036BDC9B}"));
+	RegCreateKey(HKEY_CLASSES_ROOT, wszKey, &hKey);
+	RegCloseKey(hKey);
+
+	// HKEY_CLASSES_ROOT\TypeLib\{6D2530EA-D5D8-46EC-A994-3AD1036BDC9B}\1.0
+	//      @="PingLib"
+	wcscpy(wszKey, TEXT("TypeLib\\{6D2530EA-D5D8-46EC-A994-3AD1036BDC9B}\\")
+		TEXT("1.0"));
+	RegCreateKey(HKEY_CLASSES_ROOT, wszKey, &hKey);
+	wcscpy(wszValue, TEXT("PingLib"));
+	RegSetValueEx(hKey, 0, 0, REG_SZ, (BYTE*)wszValue, ByteLen(wszValue));
+	RegCloseKey(hKey);
+
+	// HKEY_CLASSES_ROOT\TypeLib\{6D2530EA-D5D8-46EC-A994-3AD1036BDC9B}\1.0\FLAGS
+	//      @="0"
+	wcscpy(wszKey, TEXT("TypeLib\\{6D2530EA-D5D8-46EC-A994-3AD1036BDC9B}\\")
+		TEXT("1.0\\FLAGS"));
+	RegCreateKey(HKEY_CLASSES_ROOT, wszKey, &hKey);
+	wcscpy(wszValue, TEXT("0"));
+	RegSetValueEx(hKey, 0, 0, REG_SZ, (BYTE*)wszValue, ByteLen(wszValue));
+	RegCloseKey(hKey);
+
+	// HKEY_CLASSES_ROOT\TypeLib\{6D2530EA-D5D8-46EC-A994-3AD1036BDC9B}\1.0\0
+	wcscpy(wszKey, TEXT("TypeLib\\{6D2530EA-D5D8-46EC-A994-3AD1036BDC9B}\\")
+		TEXT("1.0\\0"));
+	RegCreateKey(HKEY_CLASSES_ROOT, wszKey, &hKey);
+	RegCloseKey(hKey);
+
+	wchar_t modulepath[MAX_PATH];
+	wchar_t directory[MAX_PATH];
+	wchar_t relativepath[MAX_PATH];
+
+
+	// This is hack-y, but there's no non-hacky way to do this without an
+	// actual install process, which is overkill for this test project
+	GetModuleFileName(0, modulepath, MAX_PATH);
+	_wsplitpath(modulepath, relativepath, directory, NULL, NULL);
+	wcscat(relativepath, directory);
+	wcscat(relativepath, TEXT("..\\PingProxyStubDll\\Debug\\PingProxyStubDll.tlb"));
+	_wfullpath(wszValue, relativepath, MAX_PATH);
+
+	// HKEY_CLASSES_ROOT\TypeLib\{6D2530EA-D5D8-46EC-A994-3AD1036BDC9B}\1.0\0
+	wcscpy(wszKey, TEXT("TypeLib\\{6D2530EA-D5D8-46EC-A994-3AD1036BDC9B}\\")
+		TEXT("1.0\\0\\win32"));
+	RegCreateKey(HKEY_CLASSES_ROOT, wszKey, &hKey);
+	RegSetValueEx(hKey, 0, 0, REG_SZ, (BYTE*)wszValue, ByteLen(wszValue));
+	RegCloseKey(hKey);
+
+	// HKEY_CLASSES_ROOT\TypeLib\{6D2530EA-D5D8-46EC-A994-3AD1036BDC9B}\1.0\0
+	wcscpy(wszKey, TEXT("TypeLib\\{6D2530EA-D5D8-46EC-A994-3AD1036BDC9B}\\")
+		TEXT("1.0\\0\\win64"));
+	RegCreateKey(HKEY_CLASSES_ROOT, wszKey, &hKey);
+	RegSetValueEx(hKey, 0, 0, REG_SZ, (BYTE*)wszValue, ByteLen(wszValue));
+	RegCloseKey(hKey);
+
+
+	// HKEY_CLASSES_ROOT\Interface\{C3C38ECD-6377-4560-9D48-D9E493728F77}
+	//      @="IPingable"
+	wcscpy(wszKey, TEXT("Interface\\{C3C38ECD-6377-4560-9D48-D9E493728F77}"));
+	RegCreateKey(HKEY_CLASSES_ROOT, wszKey, &hKey);
+	wcscpy(wszValue, TEXT("IPingable"));
+	RegSetValueEx(hKey, 0, 0, REG_SZ, (BYTE*)wszValue, ByteLen(wszValue));
+	RegCloseKey(hKey);
+
+	// HKEY_CLASSES_ROOT\Interface\{C3C38ECD-6377-4560-9D48-D9E493728F77}\ProxyStubClsid32
+	//      @="{00020424-0000-0000-C000-000000000046}"
+	wcscpy(wszKey, TEXT("Interface\\{C3C38ECD-6377-4560-9D48-D9E493728F77}\\")
+		TEXT("ProxyStubClsid32"));
+	RegCreateKey(HKEY_CLASSES_ROOT, wszKey, &hKey);
+	wcscpy(wszValue, TEXT("{00020424-0000-0000-C000-000000000046}"));
+	RegSetValueEx(hKey, 0, 0, REG_SZ, (BYTE*)wszValue, ByteLen(wszValue));
+	RegCloseKey(hKey);
+
+	// HKEY_CLASSES_ROOT\Interface\{C3C38ECD-6377-4560-9D48-D9E493728F77}\TypeLib
+	//      @="{6D2530EA-D5D8-46EC-A994-3AD1036BDC9B}"
+	wcscpy(wszKey, TEXT("Interface\\{C3C38ECD-6377-4560-9D48-D9E493728F77}\\")
+		TEXT("TypeLib"));
+	RegCreateKey(HKEY_CLASSES_ROOT, wszKey, &hKey);
+	wcscpy(wszValue, TEXT("{6D2530EA-D5D8-46EC-A994-3AD1036BDC9B}"));
+	RegSetValueEx(hKey, 0, 0, REG_SZ, (BYTE*)wszValue, ByteLen(wszValue));
+	RegCloseKey(hKey);
 }
 
 //-------------------------------------------------------------------
@@ -93,11 +187,39 @@ void UnregisterComponent()
 	lRc = RegDeleteKey(HKEY_CLASSES_ROOT, TEXT("CLSID\\")
 		TEXT("{5819432D-806B-42C1-97DE-DE5A015A8497}\\")
 		TEXT("LocalServer32"));
+
 	lRc = RegDeleteKey(HKEY_CLASSES_ROOT, TEXT("CLSID\\")
-		TEXT("{5819432D-806B-42C1-97DE-DE5A015A8497}"));
+		TEXT("{5819432D-806B-42C1-97DE-DE5A015A8497}\\")
+		TEXT("TypeLib"));
+	lRc = RegDeleteKey(HKEY_CLASSES_ROOT, TEXT("TypeLib\\")
+		TEXT("{6D2530EA-D5D8-46EC-A994-3AD1036BDC9B}\\")
+		TEXT("1.0\\0"));
+	lRc = RegDeleteKey(HKEY_CLASSES_ROOT, TEXT("TypeLib\\")
+		TEXT("{6D2530EA-D5D8-46EC-A994-3AD1036BDC9B}\\")
+		TEXT("1.0\\FLAGS"));
+	lRc = RegDeleteKey(HKEY_CLASSES_ROOT, TEXT("TypeLib\\")
+		TEXT("{6D2530EA-D5D8-46EC-A994-3AD1036BDC9B}\\")
+		TEXT("1.0"));
+	lRc = RegDeleteKey(HKEY_CLASSES_ROOT, TEXT("TypeLib\\")
+		TEXT("{6D2530EA-D5D8-46EC-A994-3AD1036BDC9B}\\")
+		TEXT("1.0"));
+	lRc = RegDeleteKey(HKEY_CLASSES_ROOT, TEXT("TypeLib\\")
+		TEXT("{6D2530EA-D5D8-46EC-A994-3AD1036BDC9B}\\"));
+	lRc = RegDeleteKey(HKEY_CLASSES_ROOT, TEXT("Interface\\")
+		TEXT("{C3C38ECD-6377-4560-9D48-D9E493728F77}\\")
+		TEXT("TypeLib"));
+	lRc = RegDeleteKey(HKEY_CLASSES_ROOT, TEXT("Interface\\")
+		TEXT("{C3C38ECD-6377-4560-9D48-D9E493728F77}\\")
+		TEXT("ProxyStubClsid32"));
+	lRc = RegDeleteKey(HKEY_CLASSES_ROOT, TEXT("Interface\\")
+		TEXT("{C3C38ECD-6377-4560-9D48-D9E493728F77}\\"));
+
 	lRc = RegDeleteKey(HKEY_CLASSES_ROOT, TEXT("AppID\\")
 		TEXT("{C6D89C1D-8049-4857-8447-631F433A367D}"));
 	lRc = RegDeleteKey(HKEY_CLASSES_ROOT, TEXT("AppID\\ExecutablePingServer.exe"));
+
+	lRc = RegDeleteKey(HKEY_CLASSES_ROOT, TEXT("CLSID\\")
+		TEXT("{5819432D-806B-42C1-97DE-DE5A015A8497}"));
 }
 
 void main(int argc, char *argv[], char *envp[])
