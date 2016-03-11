@@ -40,7 +40,7 @@ int main() {
 		IClassFactory *ptrFactory = NULL;
 		HRESULT hr = CoGetClassObject(
 			CLSID_CoPingEngine,
-			CLSCTX_INPROC_SERVER,
+			CLSCTX_SERVER,
 			NULL, IID_IClassFactory,
 			reinterpret_cast<void**>(&ptrFactory)
 		);
