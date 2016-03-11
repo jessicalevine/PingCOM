@@ -24,5 +24,8 @@
     <ClCompile Include="..\PingServer\CoPingEngineFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\PingProxyStubDll\ping_i.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

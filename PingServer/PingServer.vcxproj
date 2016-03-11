@@ -158,6 +158,9 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\PingProxyStubDll\ping_i.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="CoPingEngine.cpp" />
     <ClCompile Include="CoPingEngineFactory.cpp" />
     <ClCompile Include="dllmain.cpp">
