@@ -212,3 +212,6 @@ _Pvt_Extensions/
 ModelManifest.xml
 
 *.opendb
+
+*.o
+*.exe
