@@ -222,7 +222,7 @@ void UnregisterComponent()
 		TEXT("{5819432D-806B-42C1-97DE-DE5A015A8497}"));
 }
 
-void main(int argc, char *argv[], char *envp[])
+int main(int argc, char *argv[], char *envp[])
 {
 	g_hExitEvent = CreateEvent(NULL, FALSE, FALSE, NULL);
 	assert(g_hExitEvent);
@@ -231,12 +231,12 @@ void main(int argc, char *argv[], char *envp[])
 		if (_stricmp(argv[1], "-RegServer") == 0) {
 			RegisterComponent();
 			wprintf(TEXT("Register\n"));
-			return;
+			return 0;
 		}
 		if (_stricmp(argv[1], "-UnRegServer") == 0) {
 			UnregisterComponent();
 			wprintf(TEXT("Unregistered\n"));
-			return;
+			return 0;
 		}
 	}
 
@@ -260,5 +260,5 @@ void main(int argc, char *argv[], char *envp[])
 
 	Sleep(5000);
 
-	return;
+	return 0;
 }
