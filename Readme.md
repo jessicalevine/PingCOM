@@ -6,7 +6,7 @@
  3. DLL Server: Win32 project, select DLL radio button
  4. Exe Server: Empty project
 2. Follow [this tutorial](http://blogs.msdn.com/b/eldar/archive/2006/02/28/540981.aspx) to set up the empty DLL project as the proxy/stub DLL with MIDL
-3. Add the MIDL `x_h.h` file as an Existing Item to the client and server projects
+3. Add the MIDL `x_h.h` and `x_i.c` file as Existing Items to the client and server projects
 4. Add the proxy/stub DLL folder to the "Additional Include Directories" under Project > Properties > C/C++ > General for the client and server projects
 
 ## Additional hints
@@ -14,3 +14,4 @@
 2. When completing the above tutorial you may/will probably have to change the code for the `_WIN32_WINNT` to match your Windows version
 3. The above instructions do not provide scaffold classes and methods necessary to implement COM or a DLL, but you can find them in the commit history
 4. This repo reuses code from the DLL server for the EXE server. You may wish to refactor the generic code into a fifth project or library.
+5. The EXE server registers the type library and specifies use of the Automation marshaller, while the DLL server uses the custom marshalling code present in the proxy/stub DLL (and therefore requires you to register the proxy/stub DLL as well as the server)
