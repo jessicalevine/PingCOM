@@ -2,6 +2,11 @@
 //
 
 #define UNICODE
+// This macro is a hack around the fact that we don't have a real install
+// process and therefore no good way to point the registry to the right
+// files needed to set up COM. It would be overkill to set up an install
+// process for a test project like this, so the macro will do.
+#define PROJECTPATH "C:\\Users\\Administrator\\Documents\\Visual Studio 2015\\Projects\\PingCOM"
 
 #include <assert.h>
 #include "PingServer.h"
@@ -122,18 +127,8 @@ void RegisterComponent()
 	RegCreateKey(HKEY_CLASSES_ROOT, wszKey, &hKey);
 	RegCloseKey(hKey);
 
-	wchar_t modulepath[MAX_PATH];
-	wchar_t directory[MAX_PATH];
-	wchar_t relativepath[MAX_PATH];
 
-
-	// This is hack-y, but there's no non-hacky way to do this without an
-	// actual install process, which is overkill for this test project
-	GetModuleFileName(0, modulepath, MAX_PATH);
-	_wsplitpath(modulepath, relativepath, directory, NULL, NULL);
-	wcscat(relativepath, directory);
-	wcscat(relativepath, TEXT("..\\PingProxyStubDll\\Debug\\PingProxyStubDll.tlb"));
-	_wfullpath(wszValue, relativepath, MAX_PATH);
+	wcscpy(wszValue, TEXT(PROJECTPATH) TEXT("\\PingProxyStubDll\\Debug\\PingProxyStubDll.tlb"));
 
 	// HKEY_CLASSES_ROOT\TypeLib\{6D2530EA-D5D8-46EC-A994-3AD1036BDC9B}\1.0\0
 	wcscpy(wszKey, TEXT("TypeLib\\{6D2530EA-D5D8-46EC-A994-3AD1036BDC9B}\\")
