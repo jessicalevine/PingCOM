@@ -1,4 +1,4 @@
-// PingServer.cpp : Defines the exported functions for the DLL application.
+// ExecutablePingServer.cpp : Defines the entry point for the executable.
 //
 
 #define UNICODE
