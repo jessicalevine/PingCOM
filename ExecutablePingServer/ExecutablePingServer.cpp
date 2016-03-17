@@ -186,6 +186,13 @@ void UnregisterComponent()
 	lRc = RegDeleteKey(HKEY_CLASSES_ROOT, TEXT("CLSID\\")
 		TEXT("{5819432D-806B-42C1-97DE-DE5A015A8497}\\")
 		TEXT("TypeLib"));
+
+	lRc = RegDeleteKey(HKEY_CLASSES_ROOT, TEXT("TypeLib\\")
+		TEXT("{6D2530EA-D5D8-46EC-A994-3AD1036BDC9B}\\")
+		TEXT("1.0\\0\\win32"));
+	lRc = RegDeleteKey(HKEY_CLASSES_ROOT, TEXT("TypeLib\\")
+		TEXT("{6D2530EA-D5D8-46EC-A994-3AD1036BDC9B}\\")
+		TEXT("1.0\\0\\win64"));
 	lRc = RegDeleteKey(HKEY_CLASSES_ROOT, TEXT("TypeLib\\")
 		TEXT("{6D2530EA-D5D8-46EC-A994-3AD1036BDC9B}\\")
 		TEXT("1.0\\0"));
@@ -200,6 +207,7 @@ void UnregisterComponent()
 		TEXT("1.0"));
 	lRc = RegDeleteKey(HKEY_CLASSES_ROOT, TEXT("TypeLib\\")
 		TEXT("{6D2530EA-D5D8-46EC-A994-3AD1036BDC9B}\\"));
+
 	lRc = RegDeleteKey(HKEY_CLASSES_ROOT, TEXT("Interface\\")
 		TEXT("{C3C38ECD-6377-4560-9D48-D9E493728F77}\\")
 		TEXT("TypeLib"));
