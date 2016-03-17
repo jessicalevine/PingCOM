@@ -3,8 +3,6 @@
 
 class CoPingEngineFactory : public IClassFactory {
 public:
-	CoPingEngineFactory();
-	~CoPingEngineFactory();
 	STDMETHODIMP QueryInterface(REFIID riid, void **ppv);
 	STDMETHODIMP_(ULONG) AddRef(void);
 	STDMETHODIMP_(ULONG) Release(void);

@@ -3,9 +3,6 @@
 #include "PingServer.h"
 #include "CoPingEngine.h"
 
-CoPingEngineFactory::CoPingEngineFactory() { ComponentAddRef(); }
-CoPingEngineFactory::~CoPingEngineFactory() { ComponentRelease(); }
-
 STDMETHODIMP CoPingEngineFactory::QueryInterface(REFIID riid, void **ppv) {
 	if (ppv == NULL) {
 		return E_INVALIDARG;

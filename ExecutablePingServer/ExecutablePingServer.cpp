@@ -261,7 +261,7 @@ int main(int argc, char *argv[], char *envp[])
 
 	CoUninitialize();
 
-	Sleep(5000);
+	Sleep(60000);
 
 	return 0;
 }
