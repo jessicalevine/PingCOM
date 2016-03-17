@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 8.00.0603 */
-/* at Fri Mar 11 23:25:59 2016
+/* at Thu Mar 17 19:25:19 2016
  */
 /* Compiler settings for ping.idl:
     Oicf, W1, Zp8, env=Win32 (32b run), target_arch=X86 8.00.0603 
@@ -98,7 +98,7 @@ EXTERN_C const IID IID_IPingable;
         
         virtual HRESULT STDMETHODCALLTYPE Ping( 
             /* [in] */ SHORT pingCode,
-            /* [out] */ SHORT *statusCode) = 0;
+            /* [retval][out] */ SHORT *statusCode) = 0;
         
     };
     
@@ -127,7 +127,7 @@ EXTERN_C const IID IID_IPingable;
         HRESULT ( STDMETHODCALLTYPE *Ping )( 
             IPingable * This,
             /* [in] */ SHORT pingCode,
-            /* [out] */ SHORT *statusCode);
+            /* [retval][out] */ SHORT *statusCode);
         
         END_INTERFACE
     } IPingableVtbl;
