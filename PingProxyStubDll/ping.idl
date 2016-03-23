@@ -6,12 +6,20 @@ interface IPingable : IUnknown {
 	HRESULT Ping([in] SHORT pingCode, [out, retval] SHORT * statusCode);
 }
 
+[object, uuid(0F3A24B8-AAB8-4F29-A9AD-6A47199624C8), oleautomation]
+interface IPongable : IUnknown {
+	HRESULT ResetPongCount();
+	HRESULT Pong([in] SHORT receivedCode, [out, retval] SHORT * pongCount);
+}
+
 [uuid(6D2530EA-D5D8-46EC-A994-3AD1036BDC9B), version(1.0)]
 library PingLib {
 	interface IPingable;
+	interface IPongable;
 
 	[uuid(5819432D-806B-42C1-97DE-DE5A015A8497)]
 	coclass CoPingEngine {
 		[default] interface IPingable;
+		[default, source] interface IPongable;
 	};
 }

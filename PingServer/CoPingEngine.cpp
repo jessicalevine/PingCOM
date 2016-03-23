@@ -1,9 +1,18 @@
 #include "stdafx.h"
 #include "CoPingEngine.h"
 #include "PingServer.h"
+#include "CEnumConnectionPoints.h"
 
-CoPingEngine::CoPingEngine() : m_lRefCount(0) { ComponentAddRef(); }
-CoPingEngine::~CoPingEngine() { ComponentRelease(); }
+CoPingEngine::CoPingEngine() : m_lRefCount(0) {
+	ComponentAddRef();
+
+	CConnectionPoint *pPoint = new CConnectionPoint(this);
+	pPoint->QueryInterface(IID_IConnectionPoint, (void **)&m_pPoint);
+}
+CoPingEngine::~CoPingEngine() {
+	m_pPoint->Release();
+	ComponentRelease(); 
+}
 
 HRESULT CoPingEngine::CreateObject(LPUNKNOWN pUnkOuter, REFIID riid, void** ppv) {
 	*ppv = NULL;
@@ -32,6 +41,9 @@ STDMETHODIMP CoPingEngine::QueryInterface(REFIID riid, void **ppv) {
 
 	if (riid == IID_IUnknown || riid == IID_IPingable) {
 		*ppv = static_cast<IPingable *>(this);
+	}
+	else if (riid == IID_IConnectionPointContainer) {
+		*ppv = static_cast<IConnectionPointContainer *>(this);
 	}
 	else {
 		*ppv = NULL;
@@ -68,6 +80,28 @@ STDMETHODIMP CoPingEngine::Ping(SHORT pingCode, SHORT * statusCode) {
 	else {
 		*statusCode = 401;
 	}
+
+	return S_OK;
+}
+
+STDMETHODIMP CoPingEngine::FindConnectionPoint(REFIID riid, IConnectionPoint **pConnectionPoint) {
+	if (riid == IID_IPongable) {
+		return m_pPoint->QueryInterface(IID_IConnectionPoint, (void **)pConnectionPoint);
+	}
+	return E_NOINTERFACE;
+}
+
+STDMETHODIMP CoPingEngine::EnumConnectionPoints(IEnumConnectionPoints **ppEnum) {
+	if (ppEnum == NULL) {
+		return E_POINTER;
+	}
+
+	CEnumConnectionPoints *pEnum = new CEnumConnectionPoints(m_pPoint);
+	if (pEnum == NULL) {
+		return E_OUTOFMEMORY;
+	}
+
+	*ppEnum = pEnum;
 
 	return S_OK;
 }

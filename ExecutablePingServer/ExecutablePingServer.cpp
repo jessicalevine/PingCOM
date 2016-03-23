@@ -18,6 +18,33 @@ LONG g_lComponentRefCounts = 0;
 CoPingEngineFactory g_PingEngineFactory;
 HANDLE g_hExitEvent;
 
+void DisplayStatus(wchar_t *pwszMsg, HRESULT hr)
+{
+
+	if (hr == S_OK) {
+		wprintf(TEXT("%s\n"), pwszMsg);
+		return;
+	}
+
+	if (HRESULT_FACILITY(hr) == FACILITY_WINDOWS) {
+		hr = HRESULT_CODE(hr);
+	}
+
+	wchar_t *pwszStatus;
+	FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER |
+		FORMAT_MESSAGE_FROM_SYSTEM |
+		FORMAT_MESSAGE_IGNORE_INSERTS,
+		NULL,
+		hr,
+		MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
+		(LPWSTR)&pwszStatus,
+		0,
+		NULL);
+
+	wprintf(TEXT("%s: %s (ECode: %lx)\n"), pwszMsg, pwszStatus, hr);
+
+	LocalFree(pwszStatus);
+}
 
 ULONG ComponentAddRef() {
 	ULONG ul = CoAddRefServerProcess();

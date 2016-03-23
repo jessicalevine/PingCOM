@@ -36,6 +36,15 @@
     <ClInclude Include="CoPingEngine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CConnectionPoint.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CEnumConnectionPoints.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CEnumConnections.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -54,6 +63,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\PingProxyStubDll\ping_i.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CConnectionPoint.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CEnumConnectionPoints.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CEnumConnections.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
