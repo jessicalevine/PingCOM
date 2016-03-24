@@ -6,11 +6,12 @@
 CoPingEngine::CoPingEngine() : m_lRefCount(0) {
 	ComponentAddRef();
 
-	CConnectionPoint *pPoint = new CConnectionPoint(this);
-	pPoint->QueryInterface(IID_IConnectionPoint, (void **)&m_pPoint);
+	IConnectionPointContainer *pContainer;
+	QueryInterface(IID_IConnectionPointContainer, (void **)&pContainer);
+	m_pPoint = new CConnectionPoint(pContainer);
 }
+
 CoPingEngine::~CoPingEngine() {
-	m_pPoint->Release();
 	ComponentRelease(); 
 }
 
@@ -55,11 +56,16 @@ STDMETHODIMP CoPingEngine::QueryInterface(REFIID riid, void **ppv) {
 	return S_OK;
 }
 
-STDMETHODIMP_(ULONG) CoPingEngine::AddRef(void) { return InterlockedIncrement(&m_lRefCount); }
+STDMETHODIMP_(ULONG) CoPingEngine::AddRef(void) {
+	long refCount = InterlockedIncrement(&m_lRefCount);
+	//wprintf(L"CoPingEngine::AddRef(%ld)\n", refCount);
+	return refCount;
+}
 
 STDMETHODIMP_(ULONG) CoPingEngine::Release(void) {
 	long refCount = InterlockedDecrement(&m_lRefCount);
 
+	//wprintf(L"CoPingEngine::Release(%ld)\n", refCount);
 	if (refCount == 0) {
 		delete this;
 	}
@@ -81,14 +87,36 @@ STDMETHODIMP CoPingEngine::Ping(SHORT pingCode, SHORT * statusCode) {
 		*statusCode = 401;
 	}
 
+
+	if (m_pPoint->m_pPongable != NULL) {
+		SHORT pongCount;
+		wprintf(L"Ponging with code: %hd\n", pingCode);
+		m_pPoint->m_pPongable->Pong(pingCode, &pongCount);
+		wprintf(L"Pong count: %hd\n", pongCount);
+	}
+
 	return S_OK;
 }
 
 STDMETHODIMP CoPingEngine::FindConnectionPoint(REFIID riid, IConnectionPoint **pConnectionPoint) {
-	if (riid == IID_IPongable) {
-		return m_pPoint->QueryInterface(IID_IConnectionPoint, (void **)pConnectionPoint);
+	if (pConnectionPoint == NULL) {
+		return E_POINTER;
 	}
-	return E_NOINTERFACE;
+
+	if (riid == IID_IPongable) {
+		HRESULT hr = m_pPoint->QueryInterface(IID_IConnectionPoint, (void **)pConnectionPoint);
+
+		if (SUCCEEDED(hr)) {
+			return S_OK;
+		}
+		else {
+			*pConnectionPoint = NULL;
+			return E_UNEXPECTED;
+		}
+	}
+
+	*pConnectionPoint = NULL;
+	return CONNECT_E_NOCONNECTION;
 }
 
 STDMETHODIMP CoPingEngine::EnumConnectionPoints(IEnumConnectionPoints **ppEnum) {
@@ -96,7 +124,10 @@ STDMETHODIMP CoPingEngine::EnumConnectionPoints(IEnumConnectionPoints **ppEnum) 
 		return E_POINTER;
 	}
 
-	CEnumConnectionPoints *pEnum = new CEnumConnectionPoints(m_pPoint);
+	IConnectionPoint *pInterfacePoint;
+	m_pPoint->QueryInterface(IID_IConnectionPoint, (void **)&pInterfacePoint);
+
+	CEnumConnectionPoints *pEnum = new CEnumConnectionPoints(pInterfacePoint);
 	if (pEnum == NULL) {
 		return E_OUTOFMEMORY;
 	}

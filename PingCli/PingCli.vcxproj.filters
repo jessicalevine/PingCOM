@@ -27,6 +27,9 @@
     <ClInclude Include="..\PingProxyStubDll\ping_h.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CSink.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -36,6 +39,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\PingProxyStubDll\ping_i.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CSink.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

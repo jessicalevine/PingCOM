@@ -19,5 +19,5 @@ public:
 	STDMETHODIMP Ping(SHORT pingCode, SHORT * statusCode);
 private:
 	LONG m_lRefCount;
-	IConnectionPoint *m_pPoint;
+	CConnectionPoint *m_pPoint;
 };

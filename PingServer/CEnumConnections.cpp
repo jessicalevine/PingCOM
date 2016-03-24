@@ -11,12 +11,16 @@ CEnumConnections::CEnumConnections(IPongable *pPongable) : m_lRefCount(0), finis
 	m_pPongable = pPongable;
 }
 
+CEnumConnections::~CEnumConnections() {
+	m_pPongable->Release();
+}
+
 STDMETHODIMP CEnumConnections::QueryInterface(REFIID riid, void **ppv) {
 	if (ppv == NULL) {
 		return E_INVALIDARG;
 	}
 
-	if (riid == IID_IEnumConnections) {
+	if (riid == IID_IUnknown || riid == IID_IEnumConnections) {
 		*ppv = static_cast<IEnumConnections *>(this);
 	}
 	else {

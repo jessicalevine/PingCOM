@@ -8,6 +8,7 @@
 class CConnectionPoint : public IConnectionPoint {
 public:
 	CConnectionPoint(IConnectionPointContainer *pContainer);
+	~CConnectionPoint();
 
 	STDMETHODIMP QueryInterface(REFIID riid, void **ppv);
 	STDMETHODIMP_(ULONG) AddRef(void);
@@ -18,8 +19,8 @@ public:
 	STDMETHODIMP Advise(IUnknown *pSink, DWORD *pCookie);
 	STDMETHODIMP Unadvise(DWORD cookie);
 	STDMETHODIMP EnumConnections(IEnumConnections **ppEnum);
+	IPongable *m_pPongable;
 private:
 	LONG m_lRefCount;
 	IConnectionPointContainer *m_pContainer;
-	IPongable *m_pPongable;
 };

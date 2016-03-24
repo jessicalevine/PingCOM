@@ -12,4 +12,5 @@
 
 #include <windows.h>
 #include <initguid.h>
+#include <ocidl.h>
 #include "ping_h.h"

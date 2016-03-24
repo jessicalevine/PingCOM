@@ -4,6 +4,7 @@
 class CEnumConnections : public IEnumConnections {
 public:
 	CEnumConnections(IPongable *pPongable);
+	~CEnumConnections();
 
 	STDMETHODIMP QueryInterface(REFIID riid, void **ppv);
 	STDMETHODIMP_(ULONG) AddRef(void);

@@ -4,6 +4,7 @@
 class CEnumConnectionPoints : public IEnumConnectionPoints {
 public:
 	CEnumConnectionPoints(IConnectionPoint *pPoint);
+	~CEnumConnectionPoints();
 
 	STDMETHODIMP QueryInterface(REFIID riid, void **ppv);
 	STDMETHODIMP_(ULONG) AddRef(void);

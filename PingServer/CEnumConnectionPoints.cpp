@@ -7,12 +7,16 @@ CEnumConnectionPoints::CEnumConnectionPoints(IConnectionPoint *pPoint) : m_lRefC
 	m_pPoint = pPoint;
 }
 
+CEnumConnectionPoints::~CEnumConnectionPoints() {
+	m_pPoint->Release();
+}
+
 STDMETHODIMP CEnumConnectionPoints::QueryInterface(REFIID riid, void **ppv) {
 	if (ppv == NULL) {
 		return E_INVALIDARG;
 	}
 
-	if (riid == IID_IEnumConnectionPoints) {
+	if (riid == IID_IUnknown || riid == IID_IEnumConnectionPoints) {
 		*ppv = static_cast<IEnumConnectionPoints *>(this);
 	}
 	else {

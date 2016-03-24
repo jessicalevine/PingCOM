@@ -6,12 +6,16 @@ CConnectionPoint::CConnectionPoint(IConnectionPointContainer *pContainer) : m_lR
 	m_pContainer = pContainer;
 }
 
+CConnectionPoint::~CConnectionPoint() {
+	m_pContainer->Release();
+}
+
 STDMETHODIMP CConnectionPoint::QueryInterface(REFIID riid, void **ppv) {
 	if (ppv == NULL) {
 		return E_INVALIDARG;
 	}
 
-	if (riid == IID_IConnectionPoint) {
+	if (riid == IID_IUnknown || riid == IID_IConnectionPoint) {
 		*ppv = static_cast<IConnectionPoint *>(this);
 	}
 	else {
@@ -53,20 +57,25 @@ STDMETHODIMP CConnectionPoint::Advise(IUnknown *pSink, DWORD *pCookie) {
 		return E_POINTER;
 	}
 
+
 	if (m_pPongable == NULL) {
+		LPOLESTR striid;
+		StringFromIID(IID_IPongable, &striid);
 		HRESULT hr = pSink->QueryInterface(IID_IPongable, (void **)&m_pPongable);
 
-		// We only support one sink at a time, no need to generate a random unique ID
-		*pCookie = COOKIE;
-
 		if (FAILED(hr)) {
+			*pCookie = 0;
 			DisplayStatus(L"Cannot connect (QueryInterface failed)", hr);
 			return CONNECT_E_CANNOTCONNECT;
 		}
 
+		// We only support one sink at a time, no need to generate a random unique ID
+		*pCookie = COOKIE;
+
 		return S_OK;
 	}
 
+	*pCookie = 0;
 	return CONNECT_E_ADVISELIMIT;
 }
 
@@ -83,7 +92,18 @@ STDMETHODIMP CConnectionPoint::Unadvise(DWORD cookie) {
 }
 
 STDMETHODIMP CConnectionPoint::EnumConnections(IEnumConnections ** ppEnum) {
-	//CEnumConnections *pEnum = new CEnumConnections;
-	// We only have support one interface, so we don't support enumeration
 	return E_NOTIMPL;
+
+	if (ppEnum == NULL) {
+		return E_POINTER;
+	}
+
+	CEnumConnections *pEnum = new CEnumConnections(m_pPongable);
+	if (pEnum == NULL) {
+		return E_OUTOFMEMORY;
+	}
+
+	*ppEnum = pEnum;
+
+	return S_OK;
 }

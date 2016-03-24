@@ -33,5 +33,8 @@
     <ClCompile Include="..\PingServer\CEnumConnectionPoints.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\PingServer\CEnumConnections.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
