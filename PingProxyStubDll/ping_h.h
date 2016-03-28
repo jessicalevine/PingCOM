@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 8.00.0603 */
-/* at Thu Mar 17 19:25:19 2016
+/* at Fri Mar 18 21:25:58 2016
  */
 /* Compiler settings for ping.idl:
     Oicf, W1, Zp8, env=Win32 (32b run), target_arch=X86 8.00.0603 
@@ -52,11 +52,25 @@ typedef interface IPingable IPingable;
 #endif 	/* __IPingable_FWD_DEFINED__ */
 
 
+#ifndef __IPongable_FWD_DEFINED__
+#define __IPongable_FWD_DEFINED__
+typedef interface IPongable IPongable;
+
+#endif 	/* __IPongable_FWD_DEFINED__ */
+
+
 #ifndef __IPingable_FWD_DEFINED__
 #define __IPingable_FWD_DEFINED__
 typedef interface IPingable IPingable;
 
 #endif 	/* __IPingable_FWD_DEFINED__ */
+
+
+#ifndef __IPongable_FWD_DEFINED__
+#define __IPongable_FWD_DEFINED__
+typedef interface IPongable IPongable;
+
+#endif 	/* __IPongable_FWD_DEFINED__ */
 
 
 #ifndef __CoPingEngine_FWD_DEFINED__
@@ -169,12 +183,103 @@ EXTERN_C const IID IID_IPingable;
 #endif 	/* __IPingable_INTERFACE_DEFINED__ */
 
 
+#ifndef __IPongable_INTERFACE_DEFINED__
+#define __IPongable_INTERFACE_DEFINED__
+
+/* interface IPongable */
+/* [oleautomation][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IPongable;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("0F3A24B8-AAB8-4F29-A9AD-6A47199624C8")
+    IPongable : public IUnknown
+    {
+    public:
+        virtual HRESULT STDMETHODCALLTYPE ResetPongCount( void) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE Pong( 
+            /* [in] */ SHORT receivedCode,
+            /* [retval][out] */ SHORT *pongCount) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IPongableVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IPongable * This,
+            /* [in] */ REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IPongable * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IPongable * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *ResetPongCount )( 
+            IPongable * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *Pong )( 
+            IPongable * This,
+            /* [in] */ SHORT receivedCode,
+            /* [retval][out] */ SHORT *pongCount);
+        
+        END_INTERFACE
+    } IPongableVtbl;
+
+    interface IPongable
+    {
+        CONST_VTBL struct IPongableVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IPongable_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IPongable_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IPongable_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IPongable_ResetPongCount(This)	\
+    ( (This)->lpVtbl -> ResetPongCount(This) ) 
+
+#define IPongable_Pong(This,receivedCode,pongCount)	\
+    ( (This)->lpVtbl -> Pong(This,receivedCode,pongCount) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IPongable_INTERFACE_DEFINED__ */
+
+
 
 #ifndef __PingLib_LIBRARY_DEFINED__
 #define __PingLib_LIBRARY_DEFINED__
 
 /* library PingLib */
 /* [version][uuid] */ 
+
 
 
 
