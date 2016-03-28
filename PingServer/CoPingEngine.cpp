@@ -80,6 +80,14 @@ STDMETHODIMP CoPingEngine::Ping(SHORT pingCode, SHORT * statusCode) {
 		*statusCode = 401;
 	}
 
+
+	if (m_pPoint->m_pPongable != NULL) {
+		SHORT pongCount;
+		wprintf(L"Ponging with code: %hd\n", pingCode);
+		HRESULT hr = m_pPoint->m_pPongable->Pong(pingCode, &pongCount);
+		wprintf(L"Pong count: %hd\n", pongCount);
+	}
+
 	return S_OK;
 }
 
