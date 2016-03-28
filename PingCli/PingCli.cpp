@@ -3,6 +3,7 @@
 
 #include "stdafx.h"
 #include <iostream>
+#include "CSink.h"
 
 void DisplayStatus(wchar_t *pwszMsg, HRESULT hr)
 {
@@ -32,6 +33,13 @@ void DisplayStatus(wchar_t *pwszMsg, HRESULT hr)
 	LocalFree(pwszStatus);
 }
 
+void Ping(IPingable *ptrPingable, SHORT pingCode) {
+	SHORT statusCode;
+	wprintf(L"Sending ping with code %d\n", pingCode);
+	ptrPingable->Ping(pingCode, &statusCode);
+	wprintf(L"Received status reponse %d from pinging %d\n\n", statusCode, pingCode);
+}
+
 int main() {
 	HRESULT hr = CoInitializeEx(NULL, COINIT_MULTITHREADED);
 	if (SUCCEEDED(hr)) {
@@ -55,13 +63,43 @@ int main() {
 					DisplayStatus(TEXT("IID_IPingable->Initialize() failed: "), hr);
 				}
 
-				SHORT statusCode;
-				ptrPingable->Ping(12345, &statusCode);
-				std::cout << "Status code for ping code 12345: " << statusCode << std::endl;
-				ptrPingable->Ping(777, &statusCode);
-				std::cout << "Status code for ping code 777: " << statusCode << std::endl;
-				ptrPingable->Ping(1800, &statusCode);
-				std::cout << "Status code for ping code 1800: " << statusCode << std::endl;
+				IConnectionPointContainer* pContainer;
+				hr = ptrPingable->QueryInterface(IID_IConnectionPointContainer, (void**)&pContainer);
+
+				if (SUCCEEDED(hr)) {
+					IConnectionPoint* pPoint;
+					hr = pContainer->FindConnectionPoint(IID_IPongable, &pPoint);
+					if (SUCCEEDED(hr)) {
+
+						// Instantiate the sink object.
+						wprintf(L"Instantiating sink\n");
+						CSink *sink = new CSink;
+
+						// Give the connectable object a pointer to the sink.
+						DWORD dwCookie;
+						wprintf(L"Advising sink\n");
+						pPoint->Advise((IUnknown*)sink, &dwCookie);
+
+
+						Ping(ptrPingable, 12345);
+						Ping(ptrPingable, 777);
+						Ping(ptrPingable, 1800);
+
+						wprintf(L"Unadvisising sink\n");
+						pPoint->Unadvise(dwCookie);
+
+						pPoint->Release();
+					}
+					else {
+						DisplayStatus(TEXT("IConnectionPointContainer(FindConnectionPoint) failed: "), hr);
+					}
+
+					pContainer->Release();
+				}
+				else {
+					DisplayStatus(TEXT("QueryInterface(IID_IConnectionPointContainer) failed: "), hr);
+				}
+
 
 				ptrPingable->Release();
 			}
@@ -82,3 +120,4 @@ int main() {
 
 	return 0;
 }
+
