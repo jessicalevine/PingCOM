@@ -113,6 +113,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\PingProxyStubDll\ping_i.c" />
+    <ClCompile Include="..\PingServer\CConnectionPoint.cpp" />
+    <ClCompile Include="..\PingServer\CEnumConnectionPoints.cpp" />
     <ClCompile Include="..\PingServer\CoPingEngine.cpp" />
     <ClCompile Include="..\PingServer\CoPingEngineFactory.cpp" />
     <ClCompile Include="ExecutablePingServer.cpp" />

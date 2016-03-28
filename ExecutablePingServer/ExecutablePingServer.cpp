@@ -197,6 +197,32 @@ void RegisterComponent()
 	wcscpy(wszValue, TEXT("{6D2530EA-D5D8-46EC-A994-3AD1036BDC9B}"));
 	RegSetValueEx(hKey, 0, 0, REG_SZ, (BYTE*)wszValue, ByteLen(wszValue));
 	RegCloseKey(hKey);
+
+	// HKEY_CLASSES_ROOT\Interface\{0F3A24B8-AAB8-4F29-A9AD-6A47199624C8}
+	//      @="IPongable"
+	wcscpy(wszKey, TEXT("Interface\\{0F3A24B8-AAB8-4F29-A9AD-6A47199624C8}"));
+	RegCreateKey(HKEY_CLASSES_ROOT, wszKey, &hKey);
+	wcscpy(wszValue, TEXT("IPongable"));
+	RegSetValueEx(hKey, 0, 0, REG_SZ, (BYTE*)wszValue, ByteLen(wszValue));
+	RegCloseKey(hKey);
+
+	// HKEY_CLASSES_ROOT\Interface\{0F3A24B8-AAB8-4F29-A9AD-6A47199624C8}\ProxyStubClsid32
+	//      @="{00020424-0000-0000-C000-000000000046}"
+	wcscpy(wszKey, TEXT("Interface\\{0F3A24B8-AAB8-4F29-A9AD-6A47199624C8}\\")
+		TEXT("ProxyStubClsid32"));
+	RegCreateKey(HKEY_CLASSES_ROOT, wszKey, &hKey);
+	wcscpy(wszValue, TEXT("{00020424-0000-0000-C000-000000000046}"));
+	RegSetValueEx(hKey, 0, 0, REG_SZ, (BYTE*)wszValue, ByteLen(wszValue));
+	RegCloseKey(hKey);
+
+	// HKEY_CLASSES_ROOT\Interface\{0F3A24B8-AAB8-4F29-A9AD-6A47199624C8}\TypeLib
+	//      @="{6D2530EA-D5D8-46EC-A994-3AD1036BDC9B}"
+	wcscpy(wszKey, TEXT("Interface\\{0F3A24B8-AAB8-4F29-A9AD-6A47199624C8}\\")
+		TEXT("TypeLib"));
+	RegCreateKey(HKEY_CLASSES_ROOT, wszKey, &hKey);
+	wcscpy(wszValue, TEXT("{6D2530EA-D5D8-46EC-A994-3AD1036BDC9B}"));
+	RegSetValueEx(hKey, 0, 0, REG_SZ, (BYTE*)wszValue, ByteLen(wszValue));
+	RegCloseKey(hKey);
 }
 
 //-------------------------------------------------------------------
@@ -243,6 +269,15 @@ void UnregisterComponent()
 		TEXT("ProxyStubClsid32"));
 	lRc = RegDeleteKey(HKEY_CLASSES_ROOT, TEXT("Interface\\")
 		TEXT("{C3C38ECD-6377-4560-9D48-D9E493728F77}\\"));
+
+	lRc = RegDeleteKey(HKEY_CLASSES_ROOT, TEXT("Interface\\")
+		TEXT("{0F3A24B8-AAB8-4F29-A9AD-6A47199624C8}\\")
+		TEXT("TypeLib"));
+	lRc = RegDeleteKey(HKEY_CLASSES_ROOT, TEXT("Interface\\")
+		TEXT("{0F3A24B8-AAB8-4F29-A9AD-6A47199624C8}\\")
+		TEXT("ProxyStubClsid32"));
+	lRc = RegDeleteKey(HKEY_CLASSES_ROOT, TEXT("Interface\\")
+		TEXT("{0F3A24B8-AAB8-4F29-A9AD-6A47199624C8}\\"));
 
 	lRc = RegDeleteKey(HKEY_CLASSES_ROOT, TEXT("AppID\\")
 		TEXT("{C6D89C1D-8049-4857-8447-631F433A367D}"));

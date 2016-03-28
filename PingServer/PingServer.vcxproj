@@ -151,6 +151,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\PingProxyStubDll\ping_h.h" />
+    <ClInclude Include="CConnectionPoint.h" />
+    <ClInclude Include="CEnumConnectionPoints.h" />
     <ClInclude Include="CoPingEngine.h" />
     <ClInclude Include="CoPingEngineFactory.h" />
     <ClInclude Include="PingServer.h" />
@@ -161,6 +163,9 @@
     <ClCompile Include="..\PingProxyStubDll\ping_i.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="CConnectionPoint.cpp" />
+    <ClCompile Include="CEnumConnectionPoints.cpp" />
+    <ClCompile Include="CEnumConnections.cpp" />
     <ClCompile Include="CoPingEngine.cpp" />
     <ClCompile Include="CoPingEngineFactory.cpp" />
     <ClCompile Include="dllmain.cpp">

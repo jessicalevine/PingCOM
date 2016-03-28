@@ -27,5 +27,11 @@
     <ClCompile Include="..\PingProxyStubDll\ping_i.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\PingServer\CConnectionPoint.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PingServer\CEnumConnectionPoints.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
